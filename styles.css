@@ -1,0 +1,334 @@
+/* 基础样式重置 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.container {
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 20px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+    max-width: 90vw;
+    max-height: 90vh;
+    overflow: auto;
+}
+
+.game-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.game-header h1 {
+    color: #333;
+    font-size: 2.5rem;
+    font-weight: 700;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.game-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+    padding: 20px;
+    background: #f8f9fa;
+    border-radius: 15px;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.difficulty-selector {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.difficulty-selector label {
+    font-weight: 600;
+    color: #555;
+}
+
+.difficulty-selector select {
+    padding: 8px 15px;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    background: white;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.difficulty-selector select:focus {
+    outline: none;
+    border-color: #667eea;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.game-stats {
+    display: flex;
+    gap: 20px;
+}
+
+.stat-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: white;
+    padding: 8px 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.stat-label {
+    font-weight: 600;
+    color: #666;
+    font-size: 14px;
+}
+
+.stat-value {
+    font-family: 'Courier New', monospace;
+    font-weight: bold;
+    font-size: 16px;
+    color: #333;
+    min-width: 40px;
+    text-align: center;
+}
+
+.reset-btn {
+    background: linear-gradient(145deg, #667eea, #764ba2);
+    border: none;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    font-size: 24px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.reset-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+.reset-btn:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.game-board-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+    overflow: auto;
+    max-height: 60vh;
+}
+
+.game-board {
+    display: grid;
+    gap: 2px;
+    background: #ccc;
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: inset 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.cell {
+    width: 30px;
+    height: 30px;
+    background: linear-gradient(145deg, #e6e6e6, #ffffff);
+    border: 2px outset #d0d0d0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    font-size: 14px;
+    cursor: pointer;
+    user-select: none;
+    transition: all 0.1s ease;
+    border-radius: 3px;
+}
+
+.cell:hover {
+    background: linear-gradient(145deg, #f0f0f0, #ffffff);
+}
+
+.cell:active {
+    border: 2px inset #d0d0d0;
+    background: #e0e0e0;
+}
+
+.cell.revealed {
+    background: #f0f0f0;
+    border: 1px solid #ccc;
+    cursor: default;
+}
+
+.cell.revealed:hover {
+    background: #f0f0f0;
+}
+
+.cell.flagged {
+    background: linear-gradient(145deg, #ff6b6b, #ff5252);
+    color: white;
+    border: 2px outset #ff5252;
+}
+
+.cell.flagged:hover {
+    background: linear-gradient(145deg, #ff5252, #ff4444);
+}
+
+.cell.mine {
+    background: linear-gradient(145deg, #ff4757, #ff3838);
+    color: white;
+}
+
+.cell.exploded {
+    background: linear-gradient(145deg, #ff0000, #cc0000);
+    animation: explode 0.5s ease-out;
+}
+
+@keyframes explode {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.2); background: #ff0000; }
+    100% { transform: scale(1); }
+}
+
+/* 数字颜色 */
+.cell.number-1 { color: #0000ff; }
+.cell.number-2 { color: #008000; }
+.cell.number-3 { color: #ff0000; }
+.cell.number-4 { color: #000080; }
+.cell.number-5 { color: #800000; }
+.cell.number-6 { color: #008080; }
+.cell.number-7 { color: #000000; }
+.cell.number-8 { color: #808080; }
+
+.game-status {
+    text-align: center;
+    padding: 15px;
+    background: #f8f9fa;
+    border-radius: 10px;
+    font-weight: 600;
+    font-size: 18px;
+    color: #555;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+    .container {
+        padding: 20px;
+        margin: 10px;
+    }
+    
+    .game-header h1 {
+        font-size: 2rem;
+    }
+    
+    .game-controls {
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    .game-stats {
+        justify-content: center;
+    }
+    
+    .cell {
+        width: 25px;
+        height: 25px;
+        font-size: 12px;
+    }
+    
+    .game-board {
+        gap: 1px;
+        padding: 8px;
+    }
+}
+
+@media (max-width: 480px) {
+    .game-header h1 {
+        font-size: 1.5rem;
+    }
+    
+    .cell {
+        width: 22px;
+        height: 22px;
+        font-size: 10px;
+    }
+    
+    .stat-item {
+        padding: 6px 10px;
+    }
+    
+    .stat-value {
+        font-size: 14px;
+        min-width: 35px;
+    }
+}
+
+/* 胜利和失败状态 */
+.game-status.victory {
+    background: linear-gradient(145deg, #2ecc71, #27ae60);
+    color: white;
+}
+
+.game-status.defeat {
+    background: linear-gradient(145deg, #e74c3c, #c0392b);
+    color: white;
+}
+
+/* 动画效果 */
+.cell.revealed {
+    animation: revealCell 0.3s ease-out;
+}
+
+@keyframes revealCell {
+    0% {
+        transform: scale(0.8);
+        opacity: 0.5;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+/* 加载动画 */
+.loading {
+    opacity: 0.7;
+    pointer-events: none;
+}
+
+.loading::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 20px;
+    height: 20px;
+    margin: -10px 0 0 -10px;
+    border: 2px solid #f3f3f3;
+    border-top: 2px solid #667eea;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}

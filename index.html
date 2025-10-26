@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>扫雷游戏</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header class="game-header">
+            <h1>扫雷游戏</h1>
+        </header>
+        
+        <div class="game-controls">
+            <div class="difficulty-selector">
+                <label for="difficulty">难度选择：</label>
+                <select id="difficulty">
+                    <option value="beginner">初级 (9x9)</option>
+                    <option value="intermediate">中级 (16x16)</option>
+                    <option value="expert">高级 (30x16)</option>
+                </select>
+            </div>
+            
+            <div class="game-stats">
+                <div class="stat-item">
+                    <span class="stat-label">地雷：</span>
+                    <span id="mine-counter" class="stat-value">010</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">时间：</span>
+                    <span id="timer" class="stat-value">00:00</span>
+                </div>
+            </div>
+            
+            <button id="reset-btn" class="reset-btn">
+                <span id="reset-emoji">🙂</span>
+            </button>
+        </div>
+        
+        <div class="game-board-container">
+            <div id="game-board" class="game-board">
+                <!-- 游戏网格将通过JavaScript动态生成 -->
+            </div>
+        </div>
+        
+        <div id="game-status" class="game-status">
+            点击任意格子开始游戏
+        </div>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>
